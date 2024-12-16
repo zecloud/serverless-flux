@@ -1,0 +1,2 @@
+ACR_ID=$(az acr show --name zecloud --query id --output tsv)
+az functionapp create --name fluxserver3 --storage-account serverlessflux --environment managedEnvironment-gpuconsumptiona-861e --workload-profile-name "NC8as-T4" --resource-group gpuconsumptionaca --functions-version 4 --runtime python --image zecloud.azurecr.io/serverlessflux:latest --assign-identity --scope $ACR_ID --role AcrPull --min-replicas 0  --max-replicas 1 --memory 25.0Gi  --cpu 4 
